@@ -38,7 +38,7 @@
         var data = {
             "roomid": roomid
         };
-        Util.postJson("./douyu/api/v1/room", data, function (response) {
+        Util.postJson("./proxyapi/douyu/api/v1/room", data, function (response) {
             var data = response.data;
             var playUrl = data.rtmp_url + '/' + data.rtmp_live;
 

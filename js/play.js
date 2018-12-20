@@ -15,7 +15,7 @@ function flv_load() {
     var data = {
         "roomid": roomid
     };
-    Util.postJson("./douyu/api/v1/room", data, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/room", data, function (response) {
         var data = response.data;
 
         var row1 = data.nickname + ' · ' + data.online;
@@ -31,7 +31,7 @@ function flv_load() {
 
         var str = playUrl.split('/')[2].split('.')[0];
 
-        playUrl = './douyu/' + str + "/" + playUrl.split('/')[3] + "/" + playUrl.split('/')[4];
+        playUrl = './proxylive/' + str + "/" + playUrl.split('/')[3] + "/" + playUrl.split('/')[4];
 
         console.log(playUrl);
 
@@ -107,7 +107,7 @@ function favo() {
             "userid": userInfo.id,
             "roomid": roomid
         };
-        Util.postJson("./douyu/api/v1/favo", data, function (response) {
+        Util.postJson("./proxyapi/douyu/api/v1/favo", data, function (response) {
             // alert(response.message);
             if (response.code == 0) {
                 var userFavo = response.userFavo;
@@ -134,7 +134,7 @@ function isFavo() {
         "userid": userInfo.id,
         "roomid": roomid
     };
-    Util.postJson("./douyu/api/v1/isfavo", data, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/isfavo", data, function (response) {
         if (response.code == 0) {
             if (response.isFavo == 1) {// 0：未关注 1：已关注
                 // 已关注

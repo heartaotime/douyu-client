@@ -73,7 +73,7 @@ function init() {
             username: username,
             password: password
         };
-        Util.postJson("./douyu/api/v1/login", param, function (response) {
+        Util.postJson("./proxyapi/douyu/api/v1/login", param, function (response) {
             if (response.code != 0) {
                 alert(response.message);
                 return;
@@ -130,7 +130,7 @@ function searchFavoInfo() {
     var param = {
         userid: userInfo.id
     };
-    Util.postJson("./douyu/api/v1/favolist", param, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/favolist", param, function (response) {
         if (response.code == 0) {
             var userFavos = response.userFavos;
 
@@ -150,7 +150,7 @@ function searchFavoInfo() {
 function getHotCate() {
     // 获取热播
     // var containerwidth = $('.container').width();
-    Util.postJson("./douyu/api/v1/getHotCate", {}, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/getHotCate", {}, function (response) {
         var data = response.data;
         $('.carousel-indicators').empty();
         $('.carousel-inner').empty();
@@ -213,7 +213,7 @@ function getHotCate() {
 
 function getColumnList() {
     // 获取所有频道
-    Util.postJson("./douyu/api/v1/getColumnList", {}, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/getColumnList", {}, function (response) {
         var data = response.data;
         $.each(data, function (i, v) {
             $('.dropdown-menu').append(
@@ -233,7 +233,7 @@ function getColumnDetail(data) {
         "shortName": data
         // "shortName": "syxx"
     };
-    Util.postJson("./douyu/api/v1/getColumnDetail", getColumnDetailParam, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/getColumnDetail", getColumnDetailParam, function (response) {
         var data = response.data;
 
         $.each(data, function (i, v) {
@@ -273,7 +273,7 @@ function searchInfo() {
         "offset": offset,
         "shortname": shortname
     };
-    Util.postJson("./douyu/api/v1/live", liveParam, function (response) {
+    Util.postJson("./proxyapi/douyu/api/v1/live", liveParam, function (response) {
         var data = response.data;
         setData(data);
     })
