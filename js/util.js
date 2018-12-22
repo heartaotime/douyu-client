@@ -2,6 +2,7 @@ window.Util = (function () {
 
     // 引入jquery
     document.write('<script src = "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>');
+    document.write('<script src = "https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>');
 
     var postJson = function (url, data, callback, async, showLoading) {
         var asyncFlag = true;
@@ -27,10 +28,12 @@ window.Util = (function () {
             url: url,
             data: JSON.stringify(data),
             dataType: "json",
+            contentType: "application/x-www-form-urlencoded; charset=utf-8",
             headers: {
                 "Content-Type": "application/json"
             },
             async: asyncFlag,
+            timeout: 30000,
             success: function (response) {
                 try {
                     $('#loading').modal('hide');

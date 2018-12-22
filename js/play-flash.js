@@ -15,7 +15,7 @@ function flv_load() {
     var data = {
         "roomid": roomid
     };
-    Util.postJson("./proxyapi/douyu/proxyapi/api/v1/room", data, function (response) {
+    Util.postJson("./common-server/douyu/common-server/api/v1/room", data, function (response) {
         var data = response.data;
         var playUrl = data.rtmp_url + '/' + data.rtmp_live;
 
@@ -100,7 +100,7 @@ function favo() {
             "userid": userInfo.id,
             "roomid": roomid
         };
-        Util.postJson("./proxyapi/douyu/api/v1/favo", data, function (response) {
+        Util.postJson("./common-server/douyu/api/v1/favo", data, function (response) {
             // alert(response.message);
             if (response.code == 0) {
                 var userFavo = response.userFavo;
@@ -127,7 +127,7 @@ function isFavo() {
         "userid": userInfo.id,
         "roomid": roomid
     };
-    Util.postJson("./proxyapi/douyu/api/v1/isfavo", data, function (response) {
+    Util.postJson("./common-server/douyu/api/v1/isfavo", data, function (response) {
         if (response.code == 0) {
             if (response.isFavo == 1) {// 0：未关注 1：已关注
                 // 已关注
