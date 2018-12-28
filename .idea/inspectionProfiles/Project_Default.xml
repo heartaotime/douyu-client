@@ -329,6 +329,7 @@
     <inspection_tool class="AtomicFieldUpdaterIssues" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="AtomicFieldUpdaterNotStaticFinal" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="BadExpressionStatementJS" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="BashReplaceWithDoubleBrackets" enabled="false" level="INFO" enabled_by_default="false" />
     <inspection_tool class="BatchJobDomInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="BatchXmlDomInspection" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="BigDecimalMethodWithoutRoundingCalled" enabled="false" level="WARNING" enabled_by_default="false" />
