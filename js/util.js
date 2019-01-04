@@ -50,7 +50,7 @@ window.Util = (function () {
 
                 }
                 console.error('ajax post error, ', e);
-                alert('出错了[status=' + e.status + ', statusText=' + e.statusText + ']')
+                // alert('出错了[status=' + e.status + ', statusText=' + e.statusText + ']')
             }
         });
     };
@@ -60,7 +60,8 @@ window.Util = (function () {
         var userInfo_cookie = $.cookie("userInfo");
         if (userInfo_cookie) {
             userInfo = JSON.parse(userInfo_cookie);
-            console.log('get userinfo from cookie is exist, ', userInfo);
+            // console.log('get userinfo from cookie is exist, ', userInfo);
+            console.log('get userinfo from cookie is exist');
         }
         return userInfo;
     }
@@ -83,6 +84,7 @@ window.Util = (function () {
             };
         }()
     }
+
 
     return {
         postJson: postJson,
