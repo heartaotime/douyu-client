@@ -1,3 +1,4 @@
+Util.statistics('douyu_play');
 var roomid = getUrlParam('roomid');
 
 function getUrlParam(name) {

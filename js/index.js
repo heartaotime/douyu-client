@@ -1,3 +1,4 @@
+Util.statistics('douyu_index');
 var limit = 30;
 var offset = 0;
 var shortname = "";
