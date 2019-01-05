@@ -83,9 +83,14 @@ function init() {
             $('a[data-target="#logindiv"]').html(response.userInfo.userName);
 
             // 设置cookie的有效期为10天
-            $.cookie("userInfo", JSON.stringify(response.userInfo), {
-                expires: 10
-            });
+            // $.cookie("userInfo", JSON.stringify(response.userInfo), {
+            //     expires: 10
+            // });
+
+            if (localStorage) {
+                localStorage.setItem("userInfo", JSON.stringify(response.userInfo));
+            }
+
         }, true, false);
     });
 
