@@ -27,13 +27,15 @@ window.Util = (function () {
             type: "POST",
             url: url,
             data: JSON.stringify(data),
-            dataType: "json",
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
-            headers: {
-                "Content-Type": "application/json"
-            },
+            // contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            // headers: {
+            //     "Content-Type": "application/json"
+            // },
+            contentType: "application/json; charset=utf-8", // 默认值: "application/x-www-form-urlencoded"。发送信息至服务器时内容编码类型。
+            //默认值适合大多数情况。如果你明确地传递了一个 content-type 给 $.ajax() 那么它必定会发送给服务器（即使没有数据要发送）
             async: asyncFlag,
             timeout: 30000,
+            dataType: "json", // 预期服务器返回的数据类型。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息来智能判断，比如 XML MIME 类型就被识别为 XML
             success: function (response) {
                 try {
                     $('#loading').modal('hide');
@@ -132,17 +134,22 @@ window.Util = (function () {
 
     var statistics = function (pageinfo) {
         var userInfo = getUserInfo();
-        getUserIP(function (ip) {
-            var param = {
-                userid: userInfo ? userInfo.id : -1,
-                clientip: ip,
-                pageinfo: pageinfo,
-                remark: ''
-            };
-            // 统计信息
-            Util.postJson("./common-server/user/api/v1/statistics", param, function (response) {
+        try {
+            getUserIP(function (ip) {
+                var param = {
+                    userid: userInfo ? userInfo.id : -1,
+                    clientip: ip,
+                    pageinfo: pageinfo,
+                    remark: ''
+                };
+                // 统计信息
+                Util.postJson("./common-server/user/api/v1/statistics", param, function (response) {
+                });
             });
-        });
+        } catch (error) {
+            console.log('Util.statistics error,', error);
+        }
+
     }
 
 
