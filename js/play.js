@@ -100,7 +100,7 @@ function favo() {
         var userInfo = Util.getUserInfo();
 
         if (userInfo == undefined) {
-            alert("请先登陆");
+            Util.tips("请先登陆");
             return;
         }
 
@@ -109,7 +109,7 @@ function favo() {
             "roomid": roomid
         };
         Util.postJson("./common-server/user/api/v1/favo", data, function (response) {
-            // alert(response.message);
+            // Util.tips(response.message);
             if (response.code == 0) {
                 var userFavo = response.userFavo;
                 if (userFavo.isFavo == 0) {

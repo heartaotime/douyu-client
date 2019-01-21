@@ -2,7 +2,7 @@ window.Util = (function () {
 
     // 引入jquery
     document.write('<script src = "https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>');
-    document.write('<script src = "https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>');
+    // document.write('<script src = "https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>');
 
     var postJson = function (url, data, callback, async, showLoading) {
         var asyncFlag = true;
@@ -15,13 +15,25 @@ window.Util = (function () {
             showLoadingFlag = showLoading;
         }
 
+        var index;
+
         try {
             if (showLoadingFlag) {
-                $('#loading').modal('show');
+                try {
+                    index = layer.load(1);
+                } catch (e) {
+
+                }
+                try {
+                    $('#loading').modal('show');
+                } catch (e) {
+
+                }
             }
         } catch (e) {
 
         }
+
 
         $.ajax({
             type: "POST",
@@ -38,6 +50,11 @@ window.Util = (function () {
             dataType: "json", // 预期服务器返回的数据类型。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息来智能判断，比如 XML MIME 类型就被识别为 XML
             success: function (response) {
                 try {
+                    layer.close(index);
+                } catch (e) {
+
+                }
+                try {
                     $('#loading').modal('hide');
                 } catch (e) {
 
@@ -46,6 +63,11 @@ window.Util = (function () {
                 callback(response);
             },
             error: function (e) {
+                try {
+                    layer.close(index);
+                } catch (e) {
+
+                }
                 try {
                     $('#loading').modal('hide');
                 } catch (e) {
@@ -57,21 +79,18 @@ window.Util = (function () {
         });
     };
 
+    var setUserInfo = function (userInfo) {
+        if (localStorage) {
+            localStorage.setItem("userInfo", JSON.stringify(userInfo));
+        }
+    }
+
     var getUserInfo = function () {
         if (localStorage && localStorage.getItem("userInfo")) {
             console.log('get userinfo from localStorage is exist');
             return JSON.parse(localStorage.getItem("userInfo"));
         }
-
-        var userInfo;
-        var userInfo_cookie = $.cookie("userInfo");
-        if (userInfo_cookie) {
-            localStorage.setItem("userInfo", userInfo_cookie);
-            userInfo = JSON.parse(userInfo_cookie);
-            $.removeCookie("userInfo");
-            console.log('get userinfo from cookie is exist');
-        }
-        return userInfo;
+        return;
     }
 
     var browser = {
@@ -148,16 +167,23 @@ window.Util = (function () {
             };
             // 统计信息
             Util.postJson("./common-server/user/api/v1/statistics", param, function (response) {
-            });
+            }, true, false);
         });
+    }
+
+    var tips = function (content) {
+        $('#tips .modal-body').html(content);
+        $('#tips').modal('show');
     }
 
 
     return {
         postJson: postJson,
+        setUserInfo: setUserInfo,
         getUserInfo: getUserInfo,
         browser: browser,
         getUserIP: getUserIP,
-        statistics: statistics
+        statistics: statistics,
+        tips: tips
     }
 })();

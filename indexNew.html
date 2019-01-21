@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <!--优先使用 IE 最新版本和 Chrome-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!--360 使用Google Chrome Frame-->
+    <meta name="renderer" content="webkit">
+    <!--百度禁止转码-->
+    <!--<meta http-equiv="Cache-Control" content="no-siteapp" />-->
+    <!--页面关键词 keywords-->
+    <meta name="keywords" content="斗鱼">
+    <!--关闭chrome浏览器下翻译插件-->
+    <meta name="google" value="notranslate"/>
+    <!--为移动设备添加 viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 浏览网站时的小图标 -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/douyu.png" media="screen"/>
+    <title>斗鱼</title>
+
+    <link rel="stylesheet" href="./module/layui/css/layui.css"/>
+    <script src="./module/layui/layui.js"></script>
+
+    <script src="./js/util.js"></script>
+    <style>
+        p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        img {
+            border-radius: 5px;
+        }
+
+        .layui-bg-black {
+            margin-bottom: 20px;
+        }
+
+        .layui-container {
+            margin-top: 10px;
+        }
+
+        .layui-nav .layui-nav-item a {
+            padding: 0 10px;
+        }
+
+        .layui-col-md4 {
+            margin-top: 5px;
+        }
+
+        .layui-card {
+            height: 100%;
+        }
+
+        .layui-card-header {
+            height: 60px;
+        }
+
+        .layui-collapse {
+            display: none;
+        }
+
+        .layui-row {
+            display: none;
+        }
+
+    </style>
+
+</head>
+
+<body class="layui-bg-black">
+<ul class="layui-nav">
+    <li class="layui-nav-item layui-this"><a href="javascript:;" typeext="hot">Douyu</a></li>
+    <!--<li class="layui-nav-item">-->
+    <!--<a href="javascript:;">分类</a>-->
+    <!--<dl class="layui-nav-child">-->
+    <!--</dl>-->
+    <!--</li>-->
+    <li class="layui-nav-item"><a href="javascript:;" typeext="classify">分类</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" shortname="all">所有直播</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" shortname="LOL">英雄联盟</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" shortname="wzry">王者荣耀</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" typeext="favo">我的关注</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" typeext="login">登陆/注册</a></li>
+</ul>
+
+<div class="layui-container">
+
+
+    <div class="layui-collapse" lay-accordion>
+    </div>
+
+    <div class="layui-row">
+    </div>
+
+    <div style="text-align: center; margin-top: 20px; display: none;">
+        <!--<hr>-->
+        <a href="javascript:;" style="color: #eeeeee" id="loadmore">加载更多</a>
+    </div>
+</div>
+
+<script src="./js/indexNew.js"></script>
+</body>
+
+</html>

@@ -60,13 +60,13 @@ function init() {
     $('#submit').on('click', function () {
         var username = $('#name').val();
         if (username == "") {
-            alert("请填写用户名");
+            Util.tips("请填写用户名");
             return;
         }
 
         var password = $('#pwd').val();
         if (password === "") {
-            alert("请填写密码");
+            Util.tips("请填写密码");
             return;
         }
 
@@ -76,7 +76,7 @@ function init() {
         };
         Util.postJson("./common-server/user/api/v1/login", param, function (response) {
             if (response.code != 0) {
-                alert(response.message);
+                Util.tips(response.message);
                 return;
             }
 
@@ -112,7 +112,7 @@ function init() {
     //     var windowHeight = $(this).height();
     //     if (iscarousel) {
     //         if (scrollHeight - (scrollTop + windowHeight) < 5) { //滚动到底部执行事件
-    //             // alert("我到底部了");
+    //             // Util.tips("我到底部了");
     //             offset += limit;
     //             needempty = false;
     //             searchInfo();
@@ -120,7 +120,7 @@ function init() {
     //     }
     //
     //     // if (scrollTop == 0) { //滚动到头部部执行事件
-    //     //     alert("我到头部了");
+    //     //     Util.tips("我到头部了");
     //
     //     // }
     // });
@@ -129,7 +129,7 @@ function init() {
 function searchFavoInfo() {
     var userInfo = Util.getUserInfo();
     if (!userInfo) {
-        alert('请先登陆');
+        Util.tips('请先登陆');
         return;
     }
 
