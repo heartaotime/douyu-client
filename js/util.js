@@ -93,6 +93,12 @@ window.Util = (function () {
         return;
     }
 
+    var removeUserInfo = function () {
+        if (localStorage) {
+            localStorage.removeItem("userInfo");
+        }
+    }
+
     var browser = {
         versions: function () {
             var u = window.navigator.userAgent;
@@ -181,6 +187,7 @@ window.Util = (function () {
         postJson: postJson,
         setUserInfo: setUserInfo,
         getUserInfo: getUserInfo,
+        removeUserInfo: removeUserInfo,
         browser: browser,
         getUserIP: getUserIP,
         statistics: statistics,
