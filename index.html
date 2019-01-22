@@ -38,7 +38,7 @@
             margin-bottom: 20px;
         }
 
-        .layui-container {
+        .layui-fluid {
             margin-top: 10px;
         }
 
@@ -52,16 +52,22 @@
 
         .layui-card {
             height: 100%;
+            border-radius: 5px;
+        }
+
+        .layui-card-body {
+            padding: 0;
         }
 
         .layui-card-header {
             height: 60px;
+            padding: 5px 15px;
+            border-radius: 5px;
         }
 
-        .layui-carousel, .layui-collapse, .layui-row, .layui-form {
+        .layui-carousel, .layui-collapse, .layui-row, .layui-form, .loginstatus {
             display: none;
         }
-
 
     </style>
 
@@ -70,20 +76,21 @@
 <body class="layui-bg-black">
 <ul class="layui-nav">
     <li class="layui-nav-item layui-this"><a href="javascript:;" typeext="hot">Douyu</a></li>
-    <li class="layui-nav-item">
-        <a href="javascript:;" typeext="me">我的</a>
-        <dl class="layui-nav-child">
-            <dd><a href="javascript:;" typeext="favo">我的关注</a></dd>
-            <dd><a href="javascript:;" typeext="login">登陆/注册</a></dd>
-        </dl>
-    </li>
-    <li class="layui-nav-item"><a href="javascript:;" typeext="classify">&nbsp;&nbsp;分类</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" typeext="classify">分类</a></li>
     <li class="layui-nav-item"><a href="javascript:;" shortname="all">所有直播</a></li>
+    <li class="layui-nav-item"><a href="javascript:;" typeext="me">我的</a></li>
+    <!--<li class="layui-nav-item">-->
+    <!--<a href="javascript:;" typeext="me">我的</a>-->
+    <!--<dl class="layui-nav-child">-->
+    <!--<dd><a href="javascript:;" typeext="favo">我的关注</a></dd>-->
+    <!--<dd><a href="javascript:;" typeext="login">登陆/注册</a></dd>-->
+    <!--</dl>-->
+    <!--</li>-->
     <!--<li class="layui-nav-item"><a href="javascript:;" shortname="LOL">英雄联盟</a></li>-->
     <!--<li class="layui-nav-item"><a href="javascript:;" shortname="wzry">王者荣耀</a></li>-->
 </ul>
 
-<div class="layui-container">
+<div class="layui-fluid">
 
     <div class="layui-carousel layui-bg-black layui-anim layui-anim-upbit">
         <div carousel-item>
@@ -93,7 +100,11 @@
     <div class="layui-collapse layui-anim layui-anim-upbit" lay-accordion>
     </div>
 
-    <div class="layui-row layui-anim layui-anim-upbit">
+    <div class="loginstatus">
+
+    </div>
+
+    <div class="layui-row layui-col-space5">
     </div>
 
 

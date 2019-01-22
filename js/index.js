@@ -1,13 +1,11 @@
-var layer, util, element, form, carousel, userInfo, limit = 30, offset = 0, shortname, needempty = true,
-    isLogin = false;
+var layer, util, element, form, carousel, userInfo, limit = 30, offset = 0, shortname, needempty = true;
 
 function init() {
     userInfo = Util.getUserInfo();
     if (userInfo) {
-        isLogin = true;
         // $('.layui-nav li:eq(3) a:eq(0)').html(userInfo.userName);
-        $('.layui-nav li:eq(1) a:eq(2)').html(userInfo.userName);
-        element.render('nav');
+        // $('.layui-nav li:eq(1) a:eq(2)').html(userInfo.userName);
+        // element.render('nav');
     }
     util.fixbar();
     Util.statistics('douyu_index');
@@ -25,15 +23,14 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
 
 
     element.on('nav', function (elem) {
-        // console.log(this); //当前Tab标题所在的原始DOM元素
+        // console.log(this);
+        hideAll();
 
         var typeext = $(this).attr('typeext');
-        if (typeext == 'me') {
-            return;
-        }
 
-        if (typeext != 'login') {
-            hideAll();
+        if (typeext == 'me') {
+            me();
+            return;
         }
 
         if (typeext == 'hot') { // Douyu
@@ -42,18 +39,6 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
         }
         if (typeext == 'classify') { // 分类
             getColumnList();
-            return;
-        }
-        if (typeext == 'favo') { // 我的关注
-            // $('.layui-nav-child').removeClass('layui-show');
-            // element.render('nav');
-            searchFavoInfo();
-            return;
-        }
-        if (typeext == 'login') { // 登陆
-            // $('.layui-nav-child').removeClass('layui-show');
-            // element.render('nav');
-            login();
             return;
         }
 
@@ -92,30 +77,38 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
             userInfo = response.userInfo;
             Util.setUserInfo(response.userInfo);
             // $('.layui-nav li:eq(3) a:eq(0)').html(response.userInfo.userName);
-            $('.layui-nav li:eq(1) a:eq(2)').html(response.userInfo.userName);
-            isLogin = true;
-            element.render('nav');
+            // $('.layui-nav li:eq(1) a:eq(2)').html(response.userInfo.userName);
+            // element.render('nav');
             layer.msg("登陆成功[" + response.userInfo.userName + "]");
+            hideAll();
+            me();
         });
         return false;
     });
 });
 
-
-function login() {
-    if (isLogin) { // 已经登陆，退出
-        var html = '<span style="color: #FFB800;">确认退出[' + userInfo.userName + ']吗?</span>';
-        layer.confirm(html, {icon: 3, title: '提示'}, function (index) {
-            isLogin = false;
-            Util.removeUserInfo();
-            layer.msg('退出成功');
-            history.go(0);
-        });
-    } else {
-        hideAll();
+function me() {
+    if (!userInfo) {
         $('.layui-form').show();
+    } else {
+        var html = '<blockquote class="layui-elem-quote layui-bg-gray layui-anim layui-anim-upbit">' +
+            '<i class="layui-icon layui-icon-username"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="logout()" style="color: #009688;">' + userInfo.userName + '</a><br>'
+        '</blockquote>';
+        $('.loginstatus').empty().append(html).show();
+        searchFavoInfo();
     }
 }
+
+function logout() {
+    var html = '<span style="color: #FFB800;">确认退出[' + userInfo.userName + ']吗?</span>';
+    layer.confirm(html, {icon: 3, title: '提示'}, function (index) {
+        isLogin = false;
+        Util.removeUserInfo();
+        layer.msg('退出成功');
+        history.go(0);
+    });
+}
+
 
 function hideAll() {
     $('.layui-carousel').hide(); // 轮播图
@@ -123,6 +116,7 @@ function hideAll() {
     $('.layui-collapse').hide(); // 分类
     $('.layui-row').hide(); // 直播
     $('.layui-form').hide(); // 登陆
+    $('.loginstatus').hide(); // 登陆状态
 }
 
 function searchInfo() {
@@ -143,6 +137,7 @@ function searchInfo() {
     })
 }
 
+// width: 320px; height: 180px;
 function setData(data) {
     if (needempty) {
         $('.layui-row').empty();
@@ -152,7 +147,7 @@ function setData(data) {
         var row2 = v.room_name;
         var playUrl = './play.html?roomid=' + v.room_id;
         var html = '' +
-            '<div class="layui-col-lg4 layui-col-md4 layui-col-sm6 layui-col-xs12">' +
+            '<div class="layui-col-lg4 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
             '   <div class="layui-card">' +
             '       <div class="layui-card-body">' +
             '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;" src="' + v.room_src + '"/></a>' +
