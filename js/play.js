@@ -8,17 +8,30 @@ function init() {
         favo();
         flv_load();
         getDM();
+
         setInterval(function () {
             var windowWidth = $(window).width();
             var windowHeight = $(window).height();
             var VHeight = $('.video').height();
+
+
             var DMHeight;
             // 768 xs屏幕
-            if (windowWidth > 768) {
+            if (windowWidth > 768) { // 大屏
                 DMHeight = windowHeight;
+                $('video').css('height', windowHeight - $('.tool').height() - 15 + 'px');
             } else {
                 DMHeight = windowHeight - VHeight;
             }
+
+            VHeight = $('.video').height();
+
+            if (VHeight > windowHeight) {
+                $('video').css('height', windowHeight / 3 + 'px');
+            }
+
+            VHeight = $('.video').height();
+
             // alert(windowHeight + '-' + VHeight + '=' + DMHeight);
             $('.dm').css("height", DMHeight - 15 + "px");
             if ($('.dm')[0].scrollHeight > windowHeight * 3) {

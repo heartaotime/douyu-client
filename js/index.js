@@ -75,6 +75,9 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
                 return;
             }
             userInfo = response.userInfo;
+            if (localStorage) {
+                localStorage.clear();
+            }
             Util.setUserInfo(response.userInfo);
             // $('.layui-nav li:eq(3) a:eq(0)').html(response.userInfo.userName);
             // $('.layui-nav li:eq(1) a:eq(2)').html(response.userInfo.userName);
@@ -102,8 +105,9 @@ function me() {
 function logout() {
     var html = '<span style="color: #FFB800;">确认退出[' + userInfo.userName + ']吗?</span>';
     layer.confirm(html, {icon: 3, title: '提示'}, function (index) {
-        isLogin = false;
-        Util.removeUserInfo();
+        if (localStorage) {
+            localStorage.clear();
+        }
         layer.msg('退出成功');
         history.go(0);
     });
@@ -200,23 +204,38 @@ function getColumnList() {
     });
 }
 
-function getColumnDetail(data) {
+function getColumnDetail(shortName) {
     $('.layui-colla-content').empty();
     // 获取子频道
     var getColumnDetailParam = {
-        "shortName": data
+        "shortName": shortName
     };
+
+    if (localStorage) {
+        var res = localStorage.getItem('column_detail_' + shortName);
+        if (res) {
+            setColumnDetail(JSON.parse(res));
+            return;
+        }
+    }
+
     Util.postJson("./common-server/douyu/api/v1/getColumnDetail", getColumnDetailParam, function (response) {
         var data = response.data;
-
-        var html = '<span class="layui-breadcrumb" lay-separator="|">';
-        $.each(data, function (i, v) {
-            html += '<a href="javascript:;" shortname="' + v.short_name + '">' + v.tag_name + '</a>';
-        });
-        html += '</span>';
-        $('.layui-colla-content').append(html);
-        element.render('breadcrumb');
+        if (localStorage && data) {
+            localStorage.setItem('column_detail_' + shortName, JSON.stringify(data));
+        }
+        setColumnDetail(data);
     });
+}
+
+function setColumnDetail(data) {
+    var html = '<span class="layui-breadcrumb" lay-separator="|">';
+    $.each(data, function (i, v) {
+        html += '<a href="javascript:;" shortname="' + v.short_name + '">' + v.tag_name + '</a>';
+    });
+    html += '</span>';
+    $('.layui-colla-content').append(html);
+    element.render('breadcrumb');
 }
 
 $('.layui-collapse').on('click', 'a[shortname]', function () {
