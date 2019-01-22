@@ -2,93 +2,107 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="img/douyu.png"/>
-
+    <!--优先使用 IE 最新版本和 Chrome-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <!--360 使用Google Chrome Frame-->
+    <meta name="renderer" content="webkit">
+    <!--百度禁止转码-->
+    <!--<meta http-equiv="Cache-Control" content="no-siteapp" />-->
+    <!--页面关键词 keywords-->
+    <meta name="keywords" content="斗鱼">
+    <!--关闭chrome浏览器下翻译插件-->
+    <meta name="google" value="notranslate"/>
+    <!--为移动设备添加 viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 浏览网站时的小图标 -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/douyu.png" media="screen"/>
     <title>斗鱼播放</title>
 
-    <script src="js/util.js"></script>
-
-    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./module/layui/css/layui.css"/>
+    <script src="./module/layui/layui.js"></script>
+    <script src="./js/util.js"></script>
     <script src="https://cdn.bootcss.com/flv.js/1.4.2/flv.min.js"></script>
 
     <style>
-        h6, p {
+        p {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            line-height: 29px;
+            color: black;
         }
 
-        .top {
-            padding: 1px;
+        img, video {
+            border-radius: 5px;
+        }
+
+        .layui-fluid {
+            margin-top: 5px;
+        }
+
+        .item {
+            border-radius: 5px;
+            background-color: white;
         }
 
         .dm {
-            border: 1px solid #ced4da;
-            /*overflow-y: scroll;*/
+            color: black;
             overflow-y: hidden;
             overflow-X: hidden;
-            border-radius: 3px;
-            padding: 1px;
-            border-top-color: #f8f9fa;
         }
+
+        /*.dm {*/
+        /*border: 1px solid #ced4da;*/
+        /*!*overflow-y: scroll;*!*/
+        /*overflow-y: hidden;*/
+        /*overflow-X: hidden;*/
+        /*border-radius: 3px;*/
+        /*padding: 1px;*/
+        /*border-top-color: #f8f9fa;*/
+        /*}*/
     </style>
 
 </head>
 
-<body>
+<body class="layui-bg-black">
 
+<div class="layui-fluid">
 
-<div class="container" style="max-width: 100%;">
-    <div class="row" style="max-height: 100%">
-        <div class="col-lg-9" style="padding-left: 2px;padding-right: 2px;">
-            <div class="card text-left text-muted">
-                <video id="video" controls autoplay style="width: 100%;margin: 0 auto;">
-                    Your browser is too old which doesn't support HTML5 video.
-                </video>
-                <div class="card-body" style="padding:2px 2px;">
-                    <div style="float:left;"><img class="img-thumbnail" style="width: 58px; height: 58px;"/></div>
-                    <div id="center" style="float:left;margin-left: 5px;margin-top: 3px;">
-                        <h6 class="card-title">Title</h6>
-                        <p class="card-text">Body</p>
-                    </div>
-                    <div style="float: left; margin: 9px auto;">
-                        <a href="javascript:void(0);">
-                            <img id="favo" src="img/nofavo.png" style="width: 40px;height: 40px;">
-                        </a>
+    <div class="layui-row layui-col-space1 layui-anim layui-anim-upbit item">
+        <div class="layui-col-lg9 layui-col-md9 layui-col-sm9 layui-col-xs12 video">
+            <div class="layui-row">
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <video id="video" controls autoplay style="width: 100%;margin: 0 auto;">
+                        Your browser is too old which doesn't support HTML5 video.
+                    </video>
+                </div>
+                <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">
+                    <div class="layui-row">
+                        <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs3" style="padding: 5px;">
+                            <img style="width: 58px;height: 58px;"/>
+                        </div>
+                        <div class="layui-col-lg7 layui-col-md7 layui-col-sm7 layui-col-xs7" style="padding: 5px;">
+                            <p></p>
+                            <p></p>
+                        </div>
+                        <div class="layui-col-lg2 layui-col-md2 layui-col-sm2 layui-col-xs2" style="padding: 5px;">
+                            <a href="javascript:;">
+                                <img id="favo" src="./img/nofavo.png" style="width: 40px;height: 40px;">
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-lg-3" style="padding-left: 2px;padding-right: 2px;margin-top: 2px;">
-            <!--<div class="top">-->
-            <!--<button class="btn btn-outline-primary btn-block" id="favo">关注</button>-->
-            <!--</div>-->
-            <div class="dm">
-
-            </div>
+        <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs12 dm">
         </div>
     </div>
+
 </div>
 
-<!-- tips 0 -->
-<div class="modal fade" id="tips" style="margin-top: 100px;" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary btn-sm btn-block" data-dismiss="modal">关闭</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- tips 1 -->
 
-<script src="js/play.js"></script>
+<script src="./js/play.js"></script>
 
 </body>
 

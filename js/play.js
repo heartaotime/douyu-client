@@ -1,5 +1,39 @@
-Util.statistics('douyu_play');
-var roomid = getUrlParam('roomid');
+var layer, roomid, player;
+
+function init() {
+    Util.statistics('douyu_play');
+    $(function () {
+        roomid = getUrlParam('roomid');
+        isFavo();
+        favo();
+        flv_load();
+        getDM();
+        setInterval(function () {
+            var windowWidth = $(window).width();
+            var windowHeight = $(window).height();
+            var VHeight = $('.video').height();
+            var DMHeight;
+            // 768 xs屏幕
+            if (windowWidth > 768) {
+                DMHeight = windowHeight;
+            } else {
+                DMHeight = windowHeight - VHeight;
+            }
+            // alert(windowHeight + '-' + VHeight + '=' + DMHeight);
+            $('.dm').css("height", DMHeight - 15 + "px");
+            if ($('.dm')[0].scrollHeight > windowHeight * 3) {
+                $('.dm').empty();
+            }
+            $('.dm')[0].scrollTop = $('.dm')[0].scrollHeight;
+        }, 10);
+    });
+}
+
+layui.use(['layer'], function () {
+    layer = layui.layer;
+    init();
+});
+
 
 function getUrlParam(name) {
     //构造一个含有目标参数的正则表达式对象
@@ -11,7 +45,6 @@ function getUrlParam(name) {
     return null;
 }
 
-
 function flv_load() {
     var data = {
         "roomid": roomid
@@ -21,9 +54,9 @@ function flv_load() {
 
         var row1 = data.nickname + ' · ' + data.online;
         var row2 = data.room_name;
-        $('.card-body img:eq(0)').attr('src', data.owner_avatar);
-        $('.card-body h6').html(row1).attr('title', row1);
-        $('.card-body p').html(row2).attr('title', row2);
+        $('img:eq(0)').attr('src', data.owner_avatar);
+        $('p:eq(0)').html(row1).attr('title', row1);
+        $('p:eq(1)').html(row2).attr('title', row2);
 
 
         var playUrl = data.rtmp_url + '/' + data.rtmp_live;
@@ -46,7 +79,6 @@ function flv_load() {
     });
 }
 
-var player;
 
 function flv_load_mds(mediaDataSource) {
     var element = $('#video')[0];
@@ -74,6 +106,7 @@ function getDM() {
     // var ws = new WebSocket('ws://106.13.46.83/dm');
     ws.onopen = function (evt) {  //绑定连接事件
         console.log("Connection open ...");
+        layer.msg('弹幕正在路上...');
         ws.send(roomid);
         setInterval(function () {
             ws.send('keepalive');
@@ -98,9 +131,8 @@ function getDM() {
 function favo() {
     $('#favo').on('click', function () {
         var userInfo = Util.getUserInfo();
-
         if (userInfo == undefined) {
-            Util.tips("请先登陆");
+            layer.msg("请先登陆");
             return;
         }
 
@@ -109,15 +141,17 @@ function favo() {
             "roomid": roomid
         };
         Util.postJson("./common-server/user/api/v1/favo", data, function (response) {
-            // Util.tips(response.message);
+            // layer.msg(response.message);
             if (response.code == 0) {
                 var userFavo = response.userFavo;
                 if (userFavo.isFavo == 0) {
                     // 取消关注成功
                     $('#favo').attr('src', 'img/nofavo.png');
+                    layer.msg('取消关注成功');
                 } else {
                     // 关注成功
                     $('#favo').attr('src', 'img/favo.png');
+                    layer.msg('关注成功');
                 }
             }
 
@@ -145,80 +179,9 @@ function isFavo() {
     });
 }
 
-$(document).ready(function () {
-    var windowHeight = $(window).height();
-    if ($(this).height() < windowHeight) {
-        $(this).height(windowHeight);
-    }
-});
-
-$(function () {
-    isFavo();
-    favo();
-    flv_load();
-    getDM();
-
-    setInterval(function () {
-
-        $('#center').css('width', $('.col-lg-9').css("width").split('px')[0] - 58 - 40 - 20 + 'px');
-
-
-        var windowWidth = $(window).width();
-        var windowHeight = $(window).height();
-
-        // margin-left: 5px;margin-right: 30px
-
-
-        var flag = false; // 是否时小屏幕
-        if (windowWidth < 992) { // 小屏幕
-            flag = true;
-        }
-
-        var VHeight;
-        if (flag) {
-            VHeight = windowHeight / 2;
-        } else {
-            VHeight = windowHeight;
-        }
-        VHeight = VHeight - 10;
-        $('.col-lg-9').css("height", VHeight + 'px');
-        $('#video').css('height', VHeight - $('.card-body').css("height").split('px')[0] - 2 + 'px');
-
-
-        var DMHeight;
-        if (flag) { // 小屏幕
-            DMHeight = windowHeight - VHeight - 5;
-        } else {
-            DMHeight = VHeight - 2;
-        }
-        $('.dm').css("height", DMHeight + "px");
-        if ($('.dm')[0].scrollHeight > windowHeight * 3) {
-            $('.dm').empty();
-        }
-
-        $('.dm')[0].scrollTop = $('.dm')[0].scrollHeight;
-    }, 10);
-
-    // if (windowWidth < 800) { // 小屏幕
-    //     setInterval(function () {
-    //         $('.dm')[0].scrollTop = $('.dm')[0].scrollHeight;
-    //         var height = windowHeight - $('.col-lg-9').css("height").split('px')[0] - $('.top').css("height").split('px')[0] - 5 + "px";
-    //         $('.dm').css("height", height);
-    //         if ($('.dm')[0].scrollHeight > windowHeight * 3) {
-    //             $('.dm').empty();
-    //         }
-    //
-    //     }, 10);
-    //
-    // } else {
-    //     setInterval(function () {
-    //         $('.dm')[0].scrollTop = $('.dm')[0].scrollHeight;
-    //         var height = ($('.col-lg-9').css("height").split('px')[0] - $('.top').css("height").split('px')[0]) + "px";
-    //         $('.dm').css("height", height);
-    //         if ($('.dm')[0].scrollHeight > windowHeight * 3) {
-    //             $('.dm').empty();
-    //         }
-    //     }, 10);
-    // }
-
-})
+// $(document).ready(function () {
+//     var windowHeight = $(window).height();
+//     if ($(this).height() < windowHeight) {
+//         $(this).height(windowHeight);
+//     }
+// });
