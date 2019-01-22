@@ -28,6 +28,8 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            line-height: 29px;
+            color: black;
         }
 
         img {
@@ -42,31 +44,17 @@
             margin-top: 10px;
         }
 
-        /*.layui-nav .layui-nav-item a {*/
-        /*padding: 0 18px;*/
-        /*}*/
-
-        .layui-col-md4 {
-            margin-top: 5px;
-        }
-
-        .layui-card {
-            height: 100%;
+        .item {
             border-radius: 5px;
+            background-color: white;
         }
 
-        .layui-card-body {
-            padding: 0;
-        }
-
-        .layui-card-header {
-            height: 60px;
-            padding: 5px 15px;
-            border-radius: 5px;
-        }
-
-        .layui-carousel, .layui-collapse, .layui-row, .layui-form, .loginstatus {
+        .layui-carousel, .layui-collapse, #layui-row, .layui-form, .loginstatus {
             display: none;
+        }
+
+        .layui-carousel{
+            margin-bottom: 5px;
         }
 
     </style>
@@ -104,7 +92,7 @@
 
     </div>
 
-    <div class="layui-row layui-col-space5">
+    <div class="layui-row layui-col-space5" id="layui-row">
     </div>
 
 
@@ -134,7 +122,9 @@
         </div>
         <blockquote class="layui-elem-quote layui-bg-gray">
             1.账号不存在会自动注册<br>
-            2.如遇部分问题，可以试着重新登陆下看看哦
+            2.登陆后可以在播放界面关注主播<br>
+            3.登陆后在【我的】标签下可以查看当前关注的主播<br>
+            3.如遇部分问题，可以试着重新登陆下看看哦
         </blockquote>
     </div>
 

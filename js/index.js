@@ -114,7 +114,7 @@ function hideAll() {
     $('.layui-carousel').hide(); // 轮播图
     $('#loadmore').parent().hide(); // 更多
     $('.layui-collapse').hide(); // 分类
-    $('.layui-row').hide(); // 直播
+    $('#layui-row').hide(); // 直播
     $('.layui-form').hide(); // 登陆
     $('.loginstatus').hide(); // 登陆状态
 }
@@ -140,30 +140,46 @@ function searchInfo() {
 // width: 320px; height: 180px;
 function setData(data) {
     if (needempty) {
-        $('.layui-row').empty();
+        $('#layui-row').empty();
     }
     $.each(data, function (i, v) {
         var row1 = v.nickname + ' · ' + v.online;
         var row2 = v.room_name;
         var playUrl = './play.html?roomid=' + v.room_id;
+        // var html = '' +
+        //     '<div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
+        //     '   <div class="layui-card">' +
+        //     '       <div class="layui-card-body">' +
+        //     '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;" src="' + v.room_src + '"/></a>' +
+        //     '       </div>' +
+        //     '       <div class="layui-card-header">' +
+        //     '           <img class="" style="width: 58px; height: 58px;float: left" src="' + v.avatar_mid + '"/>' +
+        //     '           <div style="float: left;margin-left: 10px;line-height: 30px;max-width: 70%;">' +
+        //     '              <p>' + row1 + '</p>' +
+        //     '              <p>' + row2 + '</p>' +
+        //     '           </div>' +
+        //     '       </div>' +
+        //     '   </div>' +
+        //     '</div>';
+
         var html = '' +
-            '<div class="layui-col-lg4 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
-            '   <div class="layui-card">' +
-            '       <div class="layui-card-body">' +
+            '<div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
+            '    <div class="layui-row item">' +
+            '       <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">' +
             '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;" src="' + v.room_src + '"/></a>' +
             '       </div>' +
-            '       <div class="layui-card-header">' +
-            '           <img class="" style="width: 58px; height: 58px;float: left" src="' + v.avatar_mid + '"/>' +
-            '           <div style="float: left;margin-left: 10px;line-height: 30px;max-width: 70%;">' +
+            '       <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs3" style="padding: 2px;">' +
+            '           <img style="width: 58px; height: 58px;" src="' + v.avatar_mid + '"/>' +
+            '       </div>' +
+            '       <div class="layui-col-lg9 layui-col-md9 layui-col-sm9 layui-col-xs9" style="padding: 2px;">' +
             '              <p>' + row1 + '</p>' +
             '              <p>' + row2 + '</p>' +
-            '           </div>' +
             '       </div>' +
-            '   </div>' +
-            '</div>';
-        $('.layui-row').append(html);
+            '    </div>'
+        '</div>';
+        $('#layui-row').append(html);
     });
-    $('.layui-row').show();
+    $('#layui-row').show();
 
 }
 
@@ -281,6 +297,8 @@ function searchFavoInfo() {
             var userFavos = response.userFavos;
             needempty = true;
             setData(userFavos.open);
+            needempty = false;
+            setData(userFavos.close);
         }
     })
 }
