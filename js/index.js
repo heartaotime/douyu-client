@@ -1,4 +1,4 @@
-var layer, util, element, form, carousel, userInfo, limit = 30, offset = 0, shortname, needempty = true;
+var layer, util, element, form, carousel, userInfo, limit = 28, offset = 0, shortname, needempty = true;
 
 function init() {
     userInfo = Util.getUserInfo();
@@ -58,6 +58,14 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
         }
     });
 
+    form.on('submit(go)', function (data) {
+        var roomid = data.field.roomid;
+        var playUrl = './play.html?roomid=' + roomid;
+        var a = $('<a target="_blank" href="' + playUrl + '"></a>');
+        a[0].click();
+        return false;
+    });
+
     form.on('submit(submit-login)', function (data) {
         var field = data.field;
         var param = {
@@ -90,7 +98,7 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
 
 function me() {
     if (!userInfo) {
-        $('.layui-form').show();
+        $('#login').show();
     } else {
         var html = '<blockquote class="layui-elem-quote layui-bg-gray layui-anim layui-anim-upbit">' +
             '<i class="layui-icon layui-icon-username"></i>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;" onclick="logout()" style="color: #009688;">' + userInfo.userName + '</a><br>'
@@ -115,11 +123,12 @@ function logout() {
 function reset() {
     offset = 0;
     needempty = true;
+    $('#goRoom').hide(); // 输入房间号快速播放
     $('.layui-carousel').hide(); // 轮播图
     $('#loadmore').parent().hide(); // 更多
     $('.layui-collapse').hide(); // 分类
     $('#layui-row').hide(); // 直播
-    $('.layui-form').hide(); // 登陆
+    $('#login').hide(); // 登陆
     $('.loginstatus').hide(); // 登陆状态
 }
 
@@ -167,7 +176,7 @@ function setData(data) {
         //     '</div>';
 
         var html = '' +
-            '<div class="layui-col-lg3 layui-col-md3 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
+            '<div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
             '    <div class="layui-row item">' +
             '       <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">' +
             '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;height: 180px;" src="' + v.room_src + '"/></a>' +
@@ -253,6 +262,7 @@ $('#loadmore').on('click', function () {
 });
 
 function getHotCate() {
+    $('#goRoom').show();
     // 获取热播
     Util.postJson("./common-server/douyu/api/v1/getHotCate", {}, function (response) {
         var data = response.data;
@@ -277,9 +287,6 @@ function getHotCate() {
         $.each(dataList, function (i, v) {
             var playUrl = './play.html?roomid=' + v.room_id;
             html += '<a class="layui-bg-black" target="_blank" href="' + playUrl + '"><img width="100%" src="' + v.room_src + '"></a>';
-            // if (i == 4) {
-            //     return false;
-            // }
         });
         $('.layui-carousel div:eq(0)').empty().append(html);
 
@@ -299,7 +306,7 @@ function getHotCate() {
                 list.push(v);
             });
         });
-        setData(list.slice(0, parseInt(list.length / 3) * 3));
+        setData(list.slice(0, parseInt(list.length / 4) * 4));
     });
 }
 

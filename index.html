@@ -56,6 +56,11 @@
         .layui-carousel {
             margin-bottom: 5px;
         }
+
+        .goRoominput {
+            width: 80%;
+            display: inline;
+        }
     </style>
 
 </head>
@@ -82,7 +87,17 @@
     <!--<li class="layui-nav-item"><a href="javascript:;" shortname="wzry">王者荣耀</a></li>-->
 </ul>
 
+
 <div class="layui-fluid">
+
+    <div class="layui-form layui-anim layui-anim-upbit" id="goRoom">
+        <div class="layui-form-item">
+            <input type="text" name="roomid" required lay-verify="required" lay-verType="tips" placeholder="输入房间号快速进入播放页"
+                   autocomplete="off"
+                   class="layui-input goRoominput">
+            <button class="layui-btn" lay-submit lay-filter="go">GO</button>
+        </div>
+    </div>
 
     <div class="layui-carousel layui-bg-black layui-anim layui-anim-upbit layui-hide-lg layui-hide-md layui-hide-sm">
         <div carousel-item>
@@ -101,7 +116,7 @@
 
 
     <!--登陆-->
-    <div class="layui-form layui-anim layui-anim-upbit" lay-filter="login">
+    <div class="layui-form layui-anim layui-anim-upbit" lay-filter="login" id="login">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-inline">
