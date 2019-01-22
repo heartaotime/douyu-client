@@ -24,7 +24,7 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
 
     element.on('nav', function (elem) {
         // console.log(this);
-        hideAll();
+        reset();
 
         var typeext = $(this).attr('typeext');
 
@@ -47,8 +47,6 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
             if (shortname == 'all') {
                 shortname = '';
             }
-            offset = 0;
-            needempty = true;
             searchInfo();
         }
 
@@ -83,7 +81,7 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
             // $('.layui-nav li:eq(1) a:eq(2)').html(response.userInfo.userName);
             // element.render('nav');
             layer.msg("登陆成功[" + response.userInfo.userName + "]");
-            hideAll();
+            reset();
             me();
         });
         return false;
@@ -114,7 +112,9 @@ function logout() {
 }
 
 
-function hideAll() {
+function reset() {
+    offset = 0;
+    needempty = true;
     $('.layui-carousel').hide(); // 轮播图
     $('#loadmore').parent().hide(); // 更多
     $('.layui-collapse').hide(); // 分类
@@ -167,13 +167,13 @@ function setData(data) {
         //     '</div>';
 
         var html = '' +
-            '<div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
+            '<div class="layui-col-lg3 layui-col-md3 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
             '    <div class="layui-row item">' +
             '       <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">' +
-            '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;" src="' + v.room_src + '"/></a>' +
+            '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;height: 180px;" src="' + v.room_src + '"/></a>' +
             '       </div>' +
             '       <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs3" style="padding: 2px;">' +
-            '           <img style="width: 58px; height: 58px;" src="' + v.avatar_mid + '"/>' +
+            '           <img style="width: 50px; height: 50px;" src="' + v.avatar_mid + '"/>' +
             '       </div>' +
             '       <div class="layui-col-lg9 layui-col-md9 layui-col-sm9 layui-col-xs9" style="padding: 2px;">' +
             '              <p>' + row1 + '</p>' +
@@ -299,7 +299,7 @@ function getHotCate() {
                 list.push(v);
             });
         });
-        setData(list.slice(5, parseInt(list.length / 3) * 3));
+        setData(list.slice(0, parseInt(list.length / 3) * 3));
     });
 }
 
