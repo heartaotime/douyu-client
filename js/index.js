@@ -38,6 +38,7 @@ layui.use(['layer', 'util', 'element', 'form', 'carousel'], function () {
             return;
         }
         if (typeext == 'classify') { // 分类
+            $('#goRoomContainer').show();
             getColumnList();
             return;
         }
@@ -181,10 +182,10 @@ function setData(data) {
             '       <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">' +
             '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;height: 180px;" src="' + v.room_src + '"/></a>' +
             '       </div>' +
-            '       <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs3" style="padding: 2px;">' +
+            '       <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs2" style="padding: 2px;">' +
             '           <img style="width: 50px; height: 50px;" src="' + v.avatar_mid + '"/>' +
             '       </div>' +
-            '       <div class="layui-col-lg9 layui-col-md9 layui-col-sm9 layui-col-xs9" style="padding: 2px;">' +
+            '       <div class="layui-col-lg9 layui-col-md9 layui-col-sm9 layui-col-xs8" style="padding: 2px;padding-left: 5px;">' +
             '              <p>' + row1 + '</p>' +
             '              <p>' + row2 + '</p>' +
             '       </div>' +
@@ -262,7 +263,6 @@ $('#loadmore').on('click', function () {
 });
 
 function getHotCate() {
-    $('#goRoomContainer').show();
     // 获取热播
     Util.postJson("./common-server/douyu/api/v1/getHotCate", {}, function (response) {
         var data = response.data;
