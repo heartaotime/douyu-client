@@ -123,7 +123,7 @@ function logout() {
 function reset() {
     offset = 0;
     needempty = true;
-    $('#goRoom').hide(); // 输入房间号快速播放
+    $('#goRoomContainer').hide(); // 输入房间号快速播放
     $('.layui-carousel').hide(); // 轮播图
     $('#loadmore').parent().hide(); // 更多
     $('.layui-collapse').hide(); // 分类
@@ -262,7 +262,7 @@ $('#loadmore').on('click', function () {
 });
 
 function getHotCate() {
-    $('#goRoom').show();
+    $('#goRoomContainer').show();
     // 获取热播
     Util.postJson("./common-server/douyu/api/v1/getHotCate", {}, function (response) {
         var data = response.data;
