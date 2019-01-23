@@ -9,31 +9,37 @@ function init() {
         flv_load();
         getDM();
 
-        setInterval(function () {
+        var timer = setInterval(function () {
             var windowWidth = $(window).width();
             var windowHeight = $(window).height();
             var VHeight = $('.video').height();
-
-
             var DMHeight;
             // 768 xs屏幕
             if (windowWidth > 768) { // 大屏
                 DMHeight = windowHeight;
                 $('video').css('height', windowHeight - $('.tool').height() - 15 + 'px');
             } else {
+                if (VHeight > windowHeight) {
+                    $('video').css('height', windowHeight / 3 + 'px');
+                }
+                VHeight = $('.video').height();
                 DMHeight = windowHeight - VHeight;
             }
-
-            VHeight = $('.video').height();
-
-            if (VHeight > windowHeight) {
-                $('video').css('height', windowHeight / 3 + 'px');
-            }
-
-            VHeight = $('.video').height();
-
             // alert(windowHeight + '-' + VHeight + '=' + DMHeight);
             $('.dm').css("height", DMHeight - 15 + "px");
+        }, 10);
+
+        $('video')[0].addEventListener('canplaythrough', function () {
+            if (timer) {
+                try {
+                    clearInterval(timer);
+                } catch (e) {
+                }
+            }
+        });
+
+        setInterval(function () {
+            var windowHeight = $(window).height();
             if ($('.dm')[0].scrollHeight > windowHeight * 3) {
                 $('.dm').empty();
             }
