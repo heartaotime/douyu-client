@@ -45,14 +45,26 @@
             margin-bottom: 10px;
         }
 
-        .item {
-            border-radius: 5px;
+
+        .item1 {
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            background-color: white;
+        }
+
+        .item2 {
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
             background-color: white;
         }
 
         .layui-carousel, .layui-collapse, #layui-row, #goRoomContainer, #login, .loginstatus {
             display: none;
         }
+
+        /*#layui-row {*/
+        /*padding: 5px;*/
+        /*}*/
 
         .layui-carousel {
             margin-bottom: 5px;
@@ -68,41 +80,21 @@
 
 <body class="layui-bg-black">
 
-<div class="layui-fluid">
+<div class="layui-container">
     <ul class="layui-nav layui-row layui-anim layui-anim-upbit">
-        <li class="layui-nav-item layui-this layui-col-lg1"><a href="javascript:;" typeext="hot">Douyu</a></li>
-        <li class="layui-nav-item layui-col-lg1"><a href="javascript:;" typeext="classify">分类</a></li>
-        <li class="layui-nav-item layui-col-lg1"><a href="javascript:;" shortname="all">所有直播</a></li>
-        <li class="layui-nav-item layui-col-lg1 layui-hide-xs"><a href="javascript:;" shortname="LOL">英雄联盟</a></li>
-        <li class="layui-nav-item layui-col-lg1 layui-hide-xs"><a href="javascript:;" shortname="wzry">王者荣耀</a></li>
-        <li class="layui-nav-item layui-col-lg1 layui-hide-xs"><a href="javascript:;" shortname="jdqs">绝地求生</a></li>
-        <li class="layui-nav-item layui-col-lg1 layui-hide-xs"><a href="javascript:;" shortname="jdqscjzc">刺激战场</a></li>
-        <li class="layui-nav-item layui-col-lg1 layui-hide-xs"><a href="javascript:;" shortname="DOTA2">DOTA2</a></li>
-        <li class="layui-nav-item layui-col-lg1"><a href="javascript:;" typeext="me">我的</a></li>
-        <li class="layui-nav-item layui-col-lg3 lay-unselect  layui-hide-xs">
-            <div class="layui-form" id="goRoomNav">
-                <div class="layui-form-item">
-                    <input type="text" name="roomid" required lay-verify="required" lay-verType="tips"
-                           placeholder="输入房间号"
-                           autocomplete="off"
-                           class="layui-input goRoominput">
-                    <button class="layui-btn" lay-submit lay-filter="go">GO</button>
-                </div>
-            </div>
-        </li>
-        <!--<li class="layui-nav-item">-->
-        <!--<a href="javascript:;" typeext="me">我的</a>-->
-        <!--<dl class="layui-nav-child">-->
-        <!--<dd><a href="javascript:;" typeext="favo">我的关注</a></dd>-->
-        <!--<dd><a href="javascript:;" typeext="login">登陆/注册</a></dd>-->
-        <!--</dl>-->
-        <!--</li>-->
-        <!--<li class="layui-nav-item"><a href="javascript:;" shortname="LOL">英雄联盟</a></li>-->
-        <!--<li class="layui-nav-item"><a href="javascript:;" shortname="wzry">王者荣耀</a></li>-->
+        <li class="layui-nav-item layui-this "><a href="javascript:;" typeext="hot">Douyu</a></li>
+        <li class="layui-nav-item"><a href="javascript:;" typeext="classify">分类</a></li>
+        <li class="layui-nav-item"><a href="javascript:;" shortname="all">所有直播</a></li>
+        <li class="layui-nav-item layui-hide-xs"><a href="javascript:;" shortname="LOL">英雄联盟</a></li>
+        <li class="layui-nav-item layui-hide-xs"><a href="javascript:;" shortname="wzry">王者荣耀</a></li>
+        <li class="layui-nav-item layui-hide-xs"><a href="javascript:;" shortname="jdqs">绝地求生</a></li>
+        <li class="layui-nav-item layui-hide-xs"><a href="javascript:;" shortname="jdqscjzc">刺激战场</a></li>
+        <li class="layui-nav-item layui-hide-xs"><a href="javascript:;" shortname="DOTA2">DOTA2</a></li>
+        <li class="layui-nav-item"><a href="javascript:;" typeext="me">我的</a></li>
     </ul>
 
 
-    <div class="layui-form layui-anim layui-anim-upbit layui-hide-lg layui-hide-md layui-hide-sm" id="goRoomContainer">
+    <div class="layui-form layui-anim layui-anim-upbit" id="goRoomContainer">
         <div class="layui-form-item">
             <input type="text" name="roomid" required lay-verify="required" lay-verType="tips"
                    placeholder="输入房间号快速进入播放页"

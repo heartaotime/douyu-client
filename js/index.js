@@ -178,10 +178,10 @@ function setData(data) {
 
         var html = '' +
             '<div class="layui-col-lg3 layui-col-md4 layui-col-sm6 layui-col-xs12 layui-anim layui-anim-upbit">' +
-            '    <div class="layui-row item">' +
-            '       <div class="layui-col-lg12 layui-col-md12 layui-col-sm12 layui-col-xs12">' +
-            '           <a target="_blank" href="' + playUrl + '"><img style="width: 100%;height: 180px;" src="' + v.room_src + '"/></a>' +
-            '       </div>' +
+            '    <div class="layui-row item1">' +
+            '       <a target="_blank" href="' + playUrl + '"><img style="width: 100%;height: 180px;" src="' + v.room_src + '"/></a>' +
+            '    </div>' +
+            '    <div class="layui-row item2">' +
             '       <div class="layui-col-lg3 layui-col-md3 layui-col-sm3 layui-col-xs2" style="padding: 2px;">' +
             '           <img style="width: 50px; height: 50px;" src="' + v.avatar_mid + '"/>' +
             '       </div>' +
