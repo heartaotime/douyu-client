@@ -6,7 +6,9 @@ function init() {
         roomid = getUrlParam('roomid');
         isFavo();
         favo();
-        flv_load();
+        // flv_load();
+        m3u8Load(); // 非高清 从斗鱼h5获取 安卓手机支持播放
+
         getDM();
 
         var timer = setInterval(function () {
@@ -62,6 +64,25 @@ function getUrlParam(name) {
     //返回参数值
     if (r != null) return unescape(r[2]);
     return null;
+}
+
+function m3u8Load() {
+    var req = {
+        "roomid": roomid
+    };
+    Util.postJson("./common-server/douyu/api/v1/getLive", req, function (response) {
+        var data = response.data;
+        $('#video').attr('src', data.hls_url);
+        Util.postJson("./common-server/douyu/api/v1/getRoomInfo", req, function (response) {
+            var data = response.data;
+
+            var row1 = data.owner_name + ' · ' + data.online;
+            var row2 = data.room_name;
+            $('img:eq(0)').attr('src', data.avatar);
+            $('p:eq(0)').html(row1).attr('title', row1);
+            $('p:eq(1)').html(row2).attr('title', row2);
+        });
+    });
 }
 
 function flv_load() {
@@ -134,7 +155,7 @@ function getDM() {
 
 
     ws.onmessage = function (evt) {//绑定收到消息事件
-        console.log("Received Message: " + evt.data);
+        // console.log("Received Message: " + evt.data);
         $('.dm').append("&nbsp;&nbsp;" + evt.data + "<br>");
     };
 
