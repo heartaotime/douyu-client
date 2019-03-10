@@ -13,7 +13,7 @@ function init() {
 
         var timer = setInterval(function () {
             var windowWidth = $(window).width();
-            var windowHeight = $(window).height();
+            var windowHeight = $(window).height() - 20; // 兼容全面屏手机
             var VHeight = $('.video').height();
             var DMHeight;
             // 768 xs屏幕
